@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YourAppName</string>
+    <string name="app_name">English Is Fun</string>
     <string name="question">What is the small letter of %1$c?</string>
     <string name="image_description" />
 </resources>
