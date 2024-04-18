@@ -1,55 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".ExercisesActivity">
-
-    <TextView
-        android:id="@+id/textViewCapitalLetter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="48sp"
-        android:textColor="#000000"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"/>
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/textViewQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="What is the small letter of this?"
         android:textSize="24sp"
-        android:textColor="#000000"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"/>
-
-    <RadioGroup
-        android:id="@+id/radioGroupLetters"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp">
-
-        <RadioButton
-            android:id="@+id/radioButtonA"
-            android:layout_width="69dp"
-            android:layout_height="wrap_content"
-            android:text="a" />
-
-        <!-- Add more radio buttons for other letters -->
-
-    </RadioGroup>
+        android:textColor="@android:color/black"
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/btnNext"
+        android:id="@+id/btnAnswer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"/>
+        android:text="Answer"
+        android:layout_below="@id/textViewQuestion"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
 
-</LinearLayout>
+
+    <Button
+        android:id="@+id/btnOption1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnAnswer"
+        android:layout_marginTop="20dp"
+        android:layout_alignStart="@id/textViewQuestion"
+        android:text="Option 1" />
+
+    <Button
+        android:id="@+id/btnOption2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnOption1"
+        android:layout_marginTop="20dp"
+        android:layout_alignStart="@id/textViewQuestion"
+        android:text="Option 2" />
+
+    <Button
+        android:id="@+id/btnOption3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnOption2"
+        android:layout_marginTop="20dp"
+        android:layout_alignStart="@id/textViewQuestion"
+        android:text="Option 3" />
+
+    <Button
+        android:id="@+id/btnOption4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnOption3"
+        android:layout_marginTop="20dp"
+        android:layout_alignStart="@id/textViewQuestion"
+        android:text="Option 4" />
+
+</RelativeLayout>

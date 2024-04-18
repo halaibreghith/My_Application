@@ -3,62 +3,89 @@ package com.example.myapplication;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Random;
 
 public class ExercisesActivity extends AppCompatActivity {
 
-    private TextView textViewCapitalLetter, textViewQuestion;
-    private RadioGroup radioGroupLetters;
-    private Button btnNext;
-    private char currentLetter = 'A';
+    private TextView textViewQuestion;
+    private Button[] optionButtons = new Button[4];
+
+    private String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+    private String currentLetter;
+    private String correctAnswer;
+    private String[] options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercises);
 
-        textViewCapitalLetter = findViewById(R.id.textViewCapitalLetter);
         textViewQuestion = findViewById(R.id.textViewQuestion);
-        radioGroupLetters = findViewById(R.id.radioGroupLetters);
-        btnNext = findViewById(R.id.btnNext);
+        optionButtons[0] = findViewById(R.id.btnOption1);
+        optionButtons[1] = findViewById(R.id.btnOption2);
+        optionButtons[2] = findViewById(R.id.btnOption3);
+        optionButtons[3] = findViewById(R.id.btnOption4);
 
-        // Set initial letter
-        setLetter(currentLetter);
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Load next letter
-                loadNextLetter();
-            }
-        });
-    }
+        showNextQuestion();
 
-    private void setLetter(char letter) {
-        // Set capital letter
-        textViewCapitalLetter.setText(String.valueOf(letter));
+        for (Button optionButton : optionButtons) {
+            optionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        // Set question
-        textViewQuestion.setText(getString(R.string.question, Character.toLowerCase(letter)));
+                    Button clickedButton = (Button) v;
+                    String selectedAnswer = clickedButton.getText().toString();
+                    checkAnswer(selectedAnswer);
 
-        // Clear radio group selection
-        radioGroupLetters.clearCheck();
-
-        // Set options for small letters
-        for (int i = 0; i < radioGroupLetters.getChildCount(); i++) {
-            RadioButton radioButton = (RadioButton) radioGroupLetters.getChildAt(i);
-            radioButton.setText(String.valueOf((char) (letter + i))); // Assuming options start from the capital letter
+                    showNextQuestion();
+                }
+            });
         }
     }
 
-    private void loadNextLetter() {
-        if (currentLetter == 'Z')
-            currentLetter = 'A';
-        else
-            currentLetter++;
-        setLetter(currentLetter);
+    private void showNextQuestion() {
+
+        Random random = new Random();
+        int randomIndex = random.nextInt(letters.length);
+        currentLetter = letters[randomIndex].toLowerCase();
+        correctAnswer = currentLetter.toLowerCase();
+
+        String question = "What is the capital letter for this letter: " + currentLetter;
+        textViewQuestion.setText(question);
+
+
+        options = new String[4];
+        int correctIndex = random.nextInt(4);
+        options[correctIndex] = correctAnswer;
+        for (int i = 0; i < 4; i++) {
+            if (i != correctIndex) {
+                options[i] = getRandomLetter().toLowerCase();
+            }
+        }
+
+        for (int i = 0; i < optionButtons.length; i++) {
+            optionButtons[i].setText(options[i].toLowerCase());
+        }
+    }
+
+    private String getRandomLetter() {
+        Random random = new Random();
+        int randomIndex = random.nextInt(letters.length);
+        return letters[randomIndex].toLowerCase();
+    }
+
+    private void checkAnswer(String selectedAnswer) {
+        if (selectedAnswer.equals(correctAnswer)) {
+            Toast.makeText(ExercisesActivity.this, "Correct Answer !", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(ExercisesActivity.this, "Wrong Answer !", Toast.LENGTH_SHORT).show();
+        }
     }
 }
+
